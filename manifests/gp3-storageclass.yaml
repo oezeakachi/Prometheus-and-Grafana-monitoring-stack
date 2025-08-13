@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gp3 # ⭐ Ensure this name is exactly 'gp3' (lowercase)
+  annotations:
+    # Optional: Makes this the default StorageClass if you don't have one already.
+    # If you have another default, you might omit this or change the existing default.
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: ebs.csi.aws.com # ⭐ This requires the AWS EBS CSI Driver to be installed and running
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+parameters:
+  type: gp3
+  fsType: ext4 # Common filesystem type, or xfs
