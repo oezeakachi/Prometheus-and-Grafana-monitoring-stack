@@ -28,6 +28,12 @@ spec:
                 enabled: true # Enable persistence for the Prometheus server
                 size: 50Gi    # Specify the desired volume size (e.g., 50 Gigabytes)
                 storageClass: gp3 # ⭐ Referencing the 'gp3' StorageClass you've defined
+
+            alertmanager:
+              persistentVolume:
+                enabled: true
+                size: 10Gi # Alertmanager usually needs less storage than Prometheus server
+                storageClass: gp3 # Ensure this matches your existing StorageClass name
   syncPolicy:
     automated:
       prune: true
